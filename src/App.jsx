@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
 import About from './pages/About'
 import Services from './pages/Services'
-import InfirmaryHUB from './pages/InfirmaryHUB'
+import InfirmaryHub from './pages/InfirmaryHUB'
 import Blog from './pages/Blog'
 import Contact from './pages/Contact'
 import Careers from './pages/Careers'
@@ -23,7 +23,7 @@ export default function App(){
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About/>} />
           <Route path="/services" element={<Services/>} />
-          <Route path="/infirmary-hub" element={<InfirmaryHUB/>} />
+          <Route path="/infirmary-hub" element={<InfirmaryHub/>} />
           <Route path="/blog" element={<Blog/>} />
           <Route path="/contact" element={<Contact/>} />
           <Route path="/careers" element={<Careers/>} />
