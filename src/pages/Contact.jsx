@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Send } from "lucide-react";
+import { Send, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import Card from "../components/ServiceCard"; // reusable card component
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
@@ -16,51 +17,34 @@ export default function Contact() {
     setTimeout(() => setStatus("Thanks — we will respond within 24 hours."), 900);
   }
 
+  const sectionVariant = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) };
+
   return (
-    <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
+    <div className="max-w-5xl mx-auto px-4 py-16 space-y-20">
+
       {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center"
-      >
+      <motion.header className="text-center" initial="hidden" whileInView="visible" variants={sectionVariant}>
         <h1 className="text-4xl font-extrabold text-gray-900">Contact Us</h1>
         <p className="mt-2 text-gray-600">We’ll respond within 24 hours.</p>
       </motion.header>
 
-      {/* Form */}
-      <motion.form
-        onSubmit={handleSubmit}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="grid grid-cols-1 gap-6"
-      >
+      {/* Contact Form */}
+      <motion.form onSubmit={handleSubmit} className="grid gap-6" initial="hidden" whileInView="visible" variants={sectionVariant}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <label className="block">
-            <span className="text-sm text-gray-700">Name</span>
-            <input
-              required
-              name="name"
-              value={form.name}
-              onChange={handleChange}
-              placeholder="Your Name"
-              className="mt-1 block w-full rounded-3xl bg-white/50 backdrop-blur-md border border-gray-300 p-3 focus:ring-2 focus:ring-sky-500 focus:outline-none shadow-sm transition"
-            />
-          </label>
-          <label className="block">
-            <span className="text-sm text-gray-700">Email</span>
-            <input
-              required
-              name="email"
-              type="email"
-              value={form.email}
-              onChange={handleChange}
-              placeholder="you@example.com"
-              className="mt-1 block w-full rounded-3xl bg-white/50 backdrop-blur-md border border-gray-300 p-3 focus:ring-2 focus:ring-sky-500 focus:outline-none shadow-sm transition"
-            />
-          </label>
+          {["name", "email"].map((field, i) => (
+            <label key={i} className="block">
+              <span className="text-sm text-gray-700 capitalize">{field}</span>
+              <input
+                required
+                name={field}
+                type={field === "email" ? "email" : "text"}
+                value={form[field]}
+                onChange={handleChange}
+                placeholder={field === "email" ? "you@example.com" : "Your Name"}
+                className="mt-1 block w-full rounded-3xl bg-white/50 backdrop-blur-md border border-gray-300 p-3 focus:ring-2 focus:ring-sky-500 focus:outline-none shadow-sm transition"
+              />
+            </label>
+          ))}
         </div>
 
         <label>
@@ -99,22 +83,17 @@ export default function Contact() {
       </motion.form>
 
       {/* Office Info */}
-      <motion.section
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="space-y-4"
-      >
+      <motion.section className="space-y-4" initial="hidden" whileInView="visible" variants={sectionVariant}>
         <h3 className="text-xl font-semibold text-gray-900">Office</h3>
-        <p className="text-gray-600">123 Business Road, City, Country</p>
-        <div className="mt-2 w-full h-64 rounded-3xl overflow-hidden shadow-md bg-white/50 backdrop-blur-md">
+        <p className="text-gray-600 flex items-center gap-2"><MapPin className="w-4 h-4 text-sky-500" />123 Business Road, City, Country</p>
+        <Card className="p-0 overflow-hidden shadow-md">
           <iframe
             title="Dealatecorp office location"
             src="https://www.google.com/maps/embed?pb=!1m18"
-            className="w-full h-full border-0"
+            className="w-full h-64 border-0"
             loading="lazy"
-          ></iframe>
-        </div>
+          />
+        </Card>
       </motion.section>
     </div>
   );

@@ -3,54 +3,50 @@ import { Link } from "react-router-dom";
 import { Mail, MapPin, Linkedin, Twitter, Github } from "lucide-react";
 
 export default function Footer() {
+  const socials = [
+    { href: "https://linkedin.com/company/dealatecorp", Icon: Linkedin, label: "LinkedIn" },
+    { href: "https://twitter.com/dealatecorp", Icon: Twitter, label: "Twitter" },
+    { href: "https://github.com/dealatecorp", Icon: Github, label: "GitHub" },
+  ];
+
   return (
-    <footer className="bg-gray-900/90 backdrop-blur-md text-gray-300">
+    <footer className="bg-gray-900/95 backdrop-blur-md text-gray-300">
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         
         {/* Brand + Social */}
-        <div className="space-y-4">
-          <img
-            src="/src/assets/logo.webp"
-            alt="Dealatecorp logo"
-            className="h-10 w-auto mb-2"
-          />
+        <div>
+          <img src="/src/assets/logo.webp" alt="Dealatecorp logo" className="h-10 w-auto mb-3" />
           <p className="text-sm leading-relaxed max-w-sm">
-            Premium IT consulting and digital innovation services. Driving
-            transformation with people-first technology.
+            Premium IT consulting and digital innovation services. Driving transformation with people-first technology.
           </p>
-          <div className="flex gap-4 mt-4">
-            {[
-              { href: "https://linkedin.com/company/dealatecorp", Icon: Linkedin },
-              { href: "https://twitter.com/dealatecorp", Icon: Twitter },
-              { href: "https://github.com/dealatecorp", Icon: Github },
-            ].map(({ href, Icon }) => (
-              <a
-                key={href}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 rounded-full bg-white/10 text-gray-300 hover:bg-sky-500 hover:text-white transition-all"
-              >
-                <Icon className="w-5 h-5" />
-              </a>
+          <ul className="flex gap-4 mt-5" role="list">
+            {socials.map(({ href, Icon, label }) => (
+              <li key={href}>
+                <a
+                  href={href}
+                  aria-label={label}
+                  target="_blank"
+                  rel="noopener noreferrer me"
+                  className="p-2 rounded-full bg-white/10 text-gray-300 hover:bg-gradient-to-r hover:from-sky-500 hover:to-violet-500 hover:scale-110 hover:text-white transition-all duration-300"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
-        {/* Services Links */}
+        {/* Services */}
         <div>
           <h4 className="text-base font-semibold text-white mb-4">Services</h4>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-sm" role="list">
             {[
               { to: "/services", label: "Digital Transformation" },
               { to: "/infirmary-hub", label: "Infirmary Hub" },
               { to: "/careers", label: "Careers" },
             ].map(({ to, label }) => (
               <li key={label}>
-                <Link
-                  to={to}
-                  className="hover:text-sky-500 transition-colors duration-300"
-                >
+                <Link to={to} className="hover:text-sky-500 transition-colors duration-300">
                   {label}
                 </Link>
               </li>
@@ -58,10 +54,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact Info */}
+        {/* Contact */}
         <div>
           <h4 className="text-base font-semibold text-white mb-4">Contact</h4>
-          <ul className="space-y-4 text-sm">
+          <ul className="space-y-4 text-sm" role="list">
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-sky-500 mt-0.5" />
               <span>
@@ -82,10 +78,9 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom */}
       <div className="border-t border-gray-700/50 py-5 text-center text-xs text-gray-500">
-        © {new Date().getFullYear()} Dealatecorp Innovations Pvt Ltd. All rights
-        reserved.
+        © {new Date().getFullYear()} Dealatecorp Innovations Pvt Ltd. All rights reserved.
       </div>
     </footer>
   );

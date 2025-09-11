@@ -5,55 +5,56 @@ const posts = [
     title: "Cloud Strategies for 2025",
     excerpt:
       "How modern enterprises are adopting hybrid cloud for resilience and cost control.",
-    image: "/src/assets/blog1.webp",
+    image: "/assets/blog1.webp",
   },
   {
     title: "The Future of IT Staffing",
     excerpt:
       "Insights into global hiring trends, remote work, and specialized talent acquisition.",
-    image: "/src/assets/blog2.webp",
+    image: "/assets/blog2.webp",
   },
   {
     title: "AI in Healthcare IT",
     excerpt:
       "Exploring how machine learning solutions improve patient care and operational efficiency.",
-    image: "/src/assets/blog3.webp",
+    image: "/assets/blog3.webp",
   },
 ];
 
 export default function Blog() {
   return (
     <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+
       {/* Header */}
-      <header className="text-center md:text-left">
-        <h1 className="text-3xl font-heading font-bold text-charcoal">
+      <header className="text-center md:text-left max-w-3xl mx-auto">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
           Dealate Insights
         </h1>
-        <p className="mt-3 text-gray-600 max-w-3xl">
+        <p className="mt-3 text-gray-600">
           Explore industry trends, thought leadership, and company updates. Stay
-          ahead with our insights on IT staffing, digital transformation,
+          ahead with insights on IT staffing, digital transformation,
           healthcare IT, and AI.
         </p>
       </header>
 
       {/* Blog Posts */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {posts.map((p, idx) => (
+        {posts.map((post, idx) => (
           <article
             key={idx}
-            className="bg-white rounded-2xl shadow-sm border overflow-hidden flex flex-col hover:shadow-md transition"
+            className="bg-white rounded-3xl shadow-md border overflow-hidden flex flex-col hover:shadow-xl transition"
           >
             <img
-              src={p.image}
-              alt={p.title}
-              className="w-full h-44 object-cover rounded-t-2xl"
+              src={post.image}
+              alt={post.title}
+              className="w-full h-48 object-cover rounded-t-3xl"
             />
             <div className="p-5 flex-1 flex flex-col">
-              <h2 className="text-lg font-semibold text-gray-900">{p.title}</h2>
-              <p className="text-sm text-gray-600 mt-2 flex-1">{p.excerpt}</p>
+              <h2 className="text-lg font-semibold text-gray-900">{post.title}</h2>
+              <p className="text-sm text-gray-600 mt-2 flex-1">{post.excerpt}</p>
               <a
                 href="#"
-                className="text-primary mt-4 text-sm font-medium inline-flex items-center gap-1 hover:underline"
+                className="mt-4 inline-flex items-center gap-1 text-sky-500 font-medium hover:underline"
               >
                 Read More →
               </a>
@@ -63,8 +64,8 @@ export default function Blog() {
       </section>
 
       {/* Subscribe Section */}
-      <section className="bg-slate-50 p-8 rounded-2xl text-center shadow-sm">
-        <h3 className="text-xl font-heading font-bold text-gray-900">
+      <section className="bg-slate-50 p-8 rounded-3xl text-center shadow-md">
+        <h3 className="text-xl font-extrabold text-gray-900">
           Subscribe for Updates
         </h3>
         <p className="mt-2 text-sm text-gray-600">
@@ -74,9 +75,9 @@ export default function Blog() {
           <input
             type="email"
             placeholder="Your email"
-            className="px-4 py-2 rounded-md border w-full sm:w-72 focus:ring-2 focus:ring-primary focus:outline-none"
+            className="px-4 py-3 rounded-2xl border focus:ring-2 focus:ring-sky-500 focus:outline-none w-full sm:w-72"
           />
-          <button className="px-5 py-2 bg-primary text-white rounded-md font-medium shadow hover:shadow-md hover:-translate-y-0.5 transition">
+          <button className="px-6 py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-2xl font-medium shadow hover:shadow-lg hover:-translate-y-0.5 transition-all">
             Subscribe
           </button>
         </form>

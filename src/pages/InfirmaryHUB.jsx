@@ -3,8 +3,24 @@ import { motion } from "framer-motion";
 import CTA from "../components/CTA";
 
 export default function InfirmaryHUB() {
+  const benefits = [
+    {
+      title: "Operational Efficiency",
+      desc: "Automate rostering and reduce administrative overhead.",
+    },
+    {
+      title: "Clinical Safety",
+      desc: "Credential checks and role-based access reduce errors.",
+    },
+    {
+      title: "Regulatory Compliance",
+      desc: "Audit-ready records and secure data handling.",
+    },
+  ];
+
   return (
     <div className="max-w-6xl mx-auto px-4 py-16 space-y-20">
+
       {/* Hero Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         <motion.div
@@ -13,7 +29,7 @@ export default function InfirmaryHUB() {
           transition={{ duration: 0.6 }}
           className="space-y-6"
         >
-          <h1 className="text-3xl sm:text-4xl font-heading font-bold text-gray-900">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
             Infirmary Hub HCM
           </h1>
           <p className="text-gray-600 text-lg">
@@ -48,7 +64,7 @@ export default function InfirmaryHUB() {
           className="rounded-3xl overflow-hidden shadow-2xl"
         >
           <img
-            src="/src/assets/hero-screenshot.webp"
+            src="/assets/hero-screenshot.webp"
             alt="Infirmary Hub dashboard preview"
             className="w-full h-[420px] object-cover"
           />
@@ -57,24 +73,9 @@ export default function InfirmaryHUB() {
 
       {/* Benefits Section */}
       <section>
-        <h2 className="text-2xl font-heading font-bold text-gray-900 mb-6">
-          Benefits
-        </h2>
+        <h2 className="text-2xl font-extrabold text-gray-900 mb-6">Benefits</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[
-            {
-              title: "Operational Efficiency",
-              desc: "Automate rostering and reduce administrative overhead.",
-            },
-            {
-              title: "Clinical Safety",
-              desc: "Credential checks and role-based access reduce errors.",
-            },
-            {
-              title: "Regulatory Compliance",
-              desc: "Audit-ready records and secure data handling.",
-            },
-          ].map((item, i) => (
+          {benefits.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, y: 20 }}
@@ -89,6 +90,7 @@ export default function InfirmaryHUB() {
           ))}
         </div>
       </section>
+
     </div>
   );
 }

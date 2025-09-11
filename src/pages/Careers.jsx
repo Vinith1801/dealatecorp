@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Briefcase, Send } from "lucide-react";
+import Card from "../components/ServiceCard"; // reuse the premium card component
 
 const jobs = [
   { role: "Java Developer", location: "Hyderabad", details: "Microservices & Spring Boot expertise (4+ years)." },
@@ -17,11 +18,16 @@ const offers = [
   "Global exposure with international clients",
 ];
 
+const sectionVariant = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) };
+
 export default function Careers() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16 space-y-20">
+
       {/* Header */}
-      <motion.header className="text-center md:text-left max-w-3xl mx-auto space-y-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+      <motion.header className="text-center md:text-left max-w-3xl mx-auto space-y-3"
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+      >
         <h1 className="text-4xl font-extrabold text-gray-900">Join Our Team</h1>
         <p className="text-gray-600">
           At Dealatecorp, we don’t just hire — we empower talent to build the future. See open roles and what makes us unique.
@@ -33,25 +39,20 @@ export default function Careers() {
         <h2 className="text-3xl font-bold text-gray-900 mb-8">Open Positions</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {jobs.map((job, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6, boxShadow: "0 16px 32px rgba(0,0,0,0.08)" }}
-              className="bg-white/50 backdrop-blur-md p-6 rounded-3xl border border-gray-100 shadow-md hover:shadow-2xl transition-all"
-            >
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-sky-500" />
-                <h3 className="text-lg font-semibold text-gray-900">{job.role}</h3>
-              </div>
-              <div className="flex items-center gap-1 mt-1 text-sm text-gray-500">
-                <MapPin className="w-4 h-4" /> {job.location}
-              </div>
-              <p className="text-sm text-gray-600 mt-2">{job.details}</p>
-              <button className="mt-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-2xl shadow hover:shadow-lg hover:-translate-y-0.5 transition">
-                <Send className="w-4 h-4" /> Apply Now
-              </button>
+            <motion.div key={i} initial="hidden" whileInView="visible" variants={sectionVariant} custom={i} viewport={{ once: true }}>
+              <Card
+                icon={<Briefcase className="w-5 h-5 text-sky-500" />}
+                title={job.role}
+                desc={
+                  <>
+                    <div className="flex items-center gap-1 text-sm text-gray-500 mb-1">
+                      <MapPin className="w-4 h-4" /> {job.location}
+                    </div>
+                    <p className="text-sm text-gray-600">{job.details}</p>
+                  </>
+}
+                cta={{ label: "Apply Now", icon: <Send className="w-4 h-4" />, gradient: "from-sky-500 to-violet-500" }}
+              />
             </motion.div>
           ))}
         </div>
@@ -62,15 +63,12 @@ export default function Careers() {
         <h2 className="text-3xl font-bold text-gray-900 mb-8">What We Offer</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {offers.map((offer, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -4, boxShadow: "0 12px 28px rgba(0,0,0,0.08)" }}
-              className="bg-white/50 backdrop-blur-md p-6 rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all"
-            >
-              <h3 className="text-lg font-semibold text-gray-900">{offer}</h3>
+            <motion.div key={i} initial="hidden" whileInView="visible" variants={sectionVariant} custom={i} viewport={{ once: true }}>
+              <Card
+                icon={<Send className="w-5 h-5 text-sky-500" />} // optional icon for uniformity
+                title={offer}
+                desc={null}
+              />
             </motion.div>
           ))}
         </div>
@@ -87,6 +85,7 @@ export default function Careers() {
           </button>
         </form>
       </section>
+
     </div>
   );
 }

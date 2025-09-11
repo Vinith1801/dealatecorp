@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Quote } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function TestimonialStrip({ items = [] }) {
+  const scrollRef = useRef();
+
   return (
     <section className="py-20 bg-gradient-to-b from-slate-50 to-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4">
@@ -10,9 +12,12 @@ export default function TestimonialStrip({ items = [] }) {
           What Our Clients Say
         </h2>
 
-        <div className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide">
+        <div
+          ref={scrollRef}
+          className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide relative"
+        >
           {items.map((t, idx) => (
-            <motion.div
+            <motion.blockquote
               key={idx}
               initial={{ y: 40, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -22,19 +27,21 @@ export default function TestimonialStrip({ items = [] }) {
               className="min-w-[300px] max-w-sm snap-start bg-white/50 backdrop-blur-md rounded-3xl p-6 border border-gray-100 shadow-md hover:shadow-2xl transition-all"
             >
               <Quote className="w-7 h-7 text-sky-500 mb-4" />
-              <p className="text-gray-700 text-base leading-relaxed mb-5">
-                “{t.quote}”
-              </p>
-              <div>
+              <p className="text-gray-700 text-base leading-relaxed mb-5">“{t.quote}”</p>
+              <footer>
                 <p className="text-gray-900 font-semibold">{t.name}</p>
                 <p className="text-gray-500 text-sm">{t.role}</p>
-              </div>
-            </motion.div>
+              </footer>
+            </motion.blockquote>
           ))}
+
+          {/* Optional fade hints */}
+          <div className="absolute top-0 left-0 w-16 h-full bg-gradient-to-r from-white/90 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-16 h-full bg-gradient-to-l from-white/90 pointer-events-none" />
         </div>
       </div>
 
-      {/* Optional subtle background circles for premium feel */}
+      {/* Animated background circles */}
       <motion.div
         aria-hidden="true"
         initial={{ scale: 0.8, opacity: 0 }}
