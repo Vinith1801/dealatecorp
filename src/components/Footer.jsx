@@ -4,35 +4,32 @@ import { Mail, MapPin, Linkedin, Twitter, Github } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400">
-      <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-3 gap-12">
+    <footer className="bg-gray-900/90 backdrop-blur-md text-gray-300">
+      <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
         
-        {/* Brand */}
-        <div>
+        {/* Brand + Social */}
+        <div className="space-y-4">
           <img
             src="/src/assets/logo.webp"
             alt="Dealatecorp logo"
-            className="h-10 w-auto mb-4"
+            className="h-10 w-auto mb-2"
           />
           <p className="text-sm leading-relaxed max-w-sm">
             Premium IT consulting and digital innovation services. Driving
             transformation with people-first technology.
           </p>
-
-          {/* Social Links */}
-          <div className="flex gap-4 mt-6">
+          <div className="flex gap-4 mt-4">
             {[
-              { href: "https://linkedin.com/company/dealatecorp", label: "LinkedIn", Icon: Linkedin },
-              { href: "https://twitter.com/dealatecorp", label: "Twitter", Icon: Twitter },
-              { href: "https://github.com/dealatecorp", label: "GitHub", Icon: Github },
-            ].map(({ href, label, Icon }) => (
+              { href: "https://linkedin.com/company/dealatecorp", Icon: Linkedin },
+              { href: "https://twitter.com/dealatecorp", Icon: Twitter },
+              { href: "https://github.com/dealatecorp", Icon: Github },
+            ].map(({ href, Icon }) => (
               <a
-                key={label}
+                key={href}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label}
-                className="p-2 rounded-full bg-white/5 text-gray-400 hover:bg-sky-500 hover:text-white transition-colors"
+                className="p-2 rounded-full bg-white/10 text-gray-300 hover:bg-sky-500 hover:text-white transition-all"
               >
                 <Icon className="w-5 h-5" />
               </a>
@@ -40,10 +37,10 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Services */}
+        {/* Services Links */}
         <div>
-          <h4 className="text-base font-semibold text-white">Services</h4>
-          <ul className="mt-4 space-y-2 text-sm">
+          <h4 className="text-base font-semibold text-white mb-4">Services</h4>
+          <ul className="space-y-2 text-sm">
             {[
               { to: "/services", label: "Digital Transformation" },
               { to: "/infirmary-hub", label: "Infirmary Hub" },
@@ -52,7 +49,7 @@ export default function Footer() {
               <li key={label}>
                 <Link
                   to={to}
-                  className="hover:text-sky-500 transition-colors"
+                  className="hover:text-sky-500 transition-colors duration-300"
                 >
                   {label}
                 </Link>
@@ -61,10 +58,10 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Contact */}
+        {/* Contact Info */}
         <div>
-          <h4 className="text-base font-semibold text-white">Contact</h4>
-          <ul className="mt-4 space-y-4 text-sm">
+          <h4 className="text-base font-semibold text-white mb-4">Contact</h4>
+          <ul className="space-y-4 text-sm">
             <li className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-sky-500 mt-0.5" />
               <span>
@@ -76,7 +73,7 @@ export default function Footer() {
               <Mail className="w-4 h-4 text-sky-500" />
               <a
                 href="mailto:info@dealatecorp.com"
-                className="hover:text-sky-500 transition-colors"
+                className="hover:text-sky-500 transition-colors duration-300"
               >
                 info@dealatecorp.com
               </a>
@@ -86,7 +83,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-700 py-5 text-center text-xs text-gray-500">
+      <div className="border-t border-gray-700/50 py-5 text-center text-xs text-gray-500">
         © {new Date().getFullYear()} Dealatecorp Innovations Pvt Ltd. All rights
         reserved.
       </div>

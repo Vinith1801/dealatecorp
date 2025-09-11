@@ -1,112 +1,88 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { MapPin, Briefcase, Send } from "lucide-react";
 
 const jobs = [
-  {
-    role: "Java Developer",
-    location: "Hyderabad",
-    details: "Microservices & Spring Boot expertise (4+ years).",
-  },
-  {
-    role: "Salesforce Developer",
-    location: "Hyderabad",
-    details: "Apex, LWC, CI/CD, TDD (5–8 years).",
-  },
-  {
-    role: "Lead Salesforce Developer",
-    location: "Noida",
-    details: "Mentor teams, lead architecture (6 years).",
-  },
-  {
-    role: "Copado DevOps Release Engineer",
-    location: "Hyderabad",
-    details: "CI/CD pipelines, Github, Salesforce DevOps (4 years).",
-  },
-  {
-    role: "Customer Support Executive",
-    location: "Hyderabad",
-    details: "Fresh graduate, excellent communication, US shift.",
-  },
+  { role: "Java Developer", location: "Hyderabad", details: "Microservices & Spring Boot expertise (4+ years)." },
+  { role: "Salesforce Developer", location: "Hyderabad", details: "Apex, LWC, CI/CD, TDD (5–8 years)." },
+  { role: "Lead Salesforce Developer", location: "Noida", details: "Mentor teams, lead architecture (6 years)." },
+  { role: "Copado DevOps Release Engineer", location: "Hyderabad", details: "CI/CD pipelines, Github, Salesforce DevOps (4 years)." },
+  { role: "Customer Support Executive", location: "Hyderabad", details: "Fresh graduate, excellent communication, US shift." },
+];
+
+const offers = [
+  "Dynamic, inclusive culture",
+  "Learning pathways, training, certifications",
+  "Hybrid and flexible working models",
+  "Global exposure with international clients",
 ];
 
 export default function Careers() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+    <div className="max-w-7xl mx-auto px-4 py-16 space-y-20">
       {/* Header */}
-      <header className="text-center md:text-left">
-        <h1 className="text-3xl font-heading font-bold text-charcoal">
-          Join Our Team
-        </h1>
-        <p className="mt-3 text-gray-600 max-w-3xl">
-          At Dealatecorp, we don’t just hire — we empower talent to build the
-          future. See open roles and what makes us unique.
+      <motion.header className="text-center md:text-left max-w-3xl mx-auto space-y-3" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+        <h1 className="text-4xl font-extrabold text-gray-900">Join Our Team</h1>
+        <p className="text-gray-600">
+          At Dealatecorp, we don’t just hire — we empower talent to build the future. See open roles and what makes us unique.
         </p>
-      </header>
+      </motion.header>
 
       {/* Open Positions */}
       <section>
-        <h2 className="text-2xl font-heading font-bold">Open Positions</h2>
-        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {jobs.map((j, i) => (
-            <div
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">Open Positions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {jobs.map((job, i) => (
+            <motion.div
               key={i}
-              className="bg-white p-6 rounded-xl border shadow-sm hover:shadow-md transition"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -6, boxShadow: "0 16px 32px rgba(0,0,0,0.08)" }}
+              className="bg-white/50 backdrop-blur-md p-6 rounded-3xl border border-gray-100 shadow-md hover:shadow-2xl transition-all"
             >
               <div className="flex items-center gap-2">
-                <Briefcase className="w-5 h-5 text-primary" />
-                <h3 className="font-semibold text-gray-900">{j.role}</h3>
+                <Briefcase className="w-5 h-5 text-sky-500" />
+                <h3 className="text-lg font-semibold text-gray-900">{job.role}</h3>
               </div>
               <div className="flex items-center gap-1 mt-1 text-sm text-gray-500">
-                <MapPin className="w-4 h-4" />
-                {j.location}
+                <MapPin className="w-4 h-4" /> {job.location}
               </div>
-              <p className="text-sm text-gray-600 mt-2">{j.details}</p>
-              <button className="mt-4 px-4 py-2 bg-primary text-white rounded-md text-sm font-medium flex items-center gap-2 hover:shadow hover:-translate-y-0.5 transition">
+              <p className="text-sm text-gray-600 mt-2">{job.details}</p>
+              <button className="mt-4 flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-2xl shadow hover:shadow-lg hover:-translate-y-0.5 transition">
                 <Send className="w-4 h-4" /> Apply Now
               </button>
-            </div>
+            </motion.div>
           ))}
         </div>
       </section>
 
       {/* What We Offer */}
       <section>
-        <h2 className="text-2xl font-heading font-bold">What We Offer</h2>
-        <ul className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-          {[
-            "Dynamic, inclusive culture",
-            "Learning pathways, training, certifications",
-            "Hybrid and flexible working models",
-            "Global exposure with international clients",
-          ].map((offer, i) => (
-            <li
+        <h2 className="text-3xl font-bold text-gray-900 mb-8">What We Offer</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {offers.map((offer, i) => (
+            <motion.div
               key={i}
-              className="bg-white rounded-xl p-6 border shadow-sm hover:shadow-md transition"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              whileHover={{ y: -4, boxShadow: "0 12px 28px rgba(0,0,0,0.08)" }}
+              className="bg-white/50 backdrop-blur-md p-6 rounded-3xl border border-gray-100 shadow-md hover:shadow-xl transition-all"
             >
-              <h3 className="font-semibold text-gray-800">{offer}</h3>
-            </li>
+              <h3 className="text-lg font-semibold text-gray-900">{offer}</h3>
+            </motion.div>
           ))}
-        </ul>
+        </div>
       </section>
 
       {/* Register Section */}
-      <section className="bg-slate-50 p-8 rounded-xl text-center shadow-sm">
-        <h3 className="text-xl font-heading font-bold text-gray-900">
-          Not ready to apply?
-        </h3>
-        <p className="mt-2 text-sm text-gray-600">
-          Register for updates if you’re exploring opportunities.
-        </p>
+      <section className="bg-white/50 backdrop-blur-md p-8 rounded-3xl text-center shadow-md">
+        <h3 className="text-2xl font-bold text-gray-900">Not ready to apply?</h3>
+        <p className="mt-2 text-gray-600">Register for updates if you’re exploring opportunities.</p>
         <form className="mt-5 flex flex-col sm:flex-row justify-center gap-3">
-          <input
-            type="email"
-            placeholder="Your email"
-            className="px-4 py-2 rounded-md border w-full sm:w-72 focus:ring-2 focus:ring-primary focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="px-5 py-2 bg-primary text-white rounded-md font-medium shadow hover:shadow-md hover:-translate-y-0.5 transition"
-          >
+          <input type="email" placeholder="Your email" className="px-4 py-3 rounded-2xl border focus:ring-2 focus:ring-sky-500 focus:outline-none w-full sm:w-72" />
+          <button className="px-6 py-3 bg-gradient-to-r from-sky-500 to-violet-500 text-white rounded-2xl shadow hover:shadow-lg hover:-translate-y-0.5 transition-all">
             Register
           </button>
         </form>

@@ -71,7 +71,7 @@ const whyUs = [
 export default function Home() {
   return (
     <div className="relative space-y-28 overflow-hidden">
-      {/* Hero */}
+      {/* Hero Section */}
       <Hero />
 
       {/* Services Section */}

@@ -1,93 +1,49 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
-import CTA from "./CTA";
-import heroImg from "../assets/hero.jpg";
 
-export default function Hero() {
+const ServiceCard = ({ icon, title, desc, oneliner }) => {
+  // Memoized gradient for hover to avoid recalculating on each render
+  const gradientClasses = useMemo(
+    () => "bg-gradient-to-br from-sky-100 to-violet-200 group-hover:from-violet-200 group-hover:to-sky-100",
+    []
+  );
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
-      {/* Background subtle gradient shapes */}
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.05 }}
-        transition={{ duration: 8, repeat: Infinity, repeatType: "mirror" }}
-        className="absolute top-20 left-16 w-36 h-36 bg-sky-200/20 rounded-xl rotate-12"
-      />
-      <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 0.05 }}
-        transition={{ duration: 10, repeat: Infinity, repeatType: "mirror" }}
-        className="absolute bottom-32 right-20 w-48 h-48 bg-violet-200/20 rounded-full"
-      />
+    <motion.article
+      whileHover={{ y: -10, scale: 1.03 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      aria-label={`Service: ${title}`}
+      className="relative bg-white rounded-3xl shadow-lg border border-gray-100 overflow-hidden group focus-within:ring-2 focus-within:ring-sky-400"
+    >
+      {/* Animated gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-sky-50 to-violet-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-3xl"></div>
 
-      {/* Hero Content */}
-      <div className="relative max-w-7xl mx-auto px-4 py-24 sm:py-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Left Text Content */}
-        <div>
-          <motion.h1
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
-          >
-            Empowering Growth <br className="hidden sm:block" /> Through{" "}
-            <span className="bg-gradient-to-r from-sky-500 to-violet-500 bg-clip-text text-transparent underline decoration-sky-400/30 underline-offset-4">
-              Digital Innovation
-            </span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
-            className="mt-6 text-lg text-gray-600 max-w-2xl leading-relaxed"
-          >
-            Enterprise-grade IT solutions — IT staffing, cloud & mobile
-            development, AI & analytics, healthcare IT — to accelerate digital
-            transformation.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            className="mt-10 flex flex-wrap gap-4"
-          >
-            <CTA to="/services" label="Explore Services" primary />
-            <CTA to="/about" label="Meet Team" />
-            <CTA to="/contact" label="Share Project Needs" />
-          </motion.div>
-
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
-            className="mt-8 text-sm text-gray-500"
-          >
-            <strong className="text-gray-900">Industries:</strong> Healthcare,
-            Finance, Retail
-          </motion.p>
+      <div className="relative p-6 flex flex-col gap-4">
+        {/* Icon */}
+        <div
+          className={`w-16 h-16 flex items-center justify-center rounded-full text-2xl font-bold text-sky-600 transition-all duration-500 ${gradientClasses}`}
+        >
+          {icon}
         </div>
 
-        {/* Right Image */}
+        {/* Text Content */}
+        <h3 className="text-lg font-semibold text-gray-900">{title}</h3>
+        <p className="text-sm text-gray-600 leading-relaxed">{desc}</p>
+        {oneliner && (
+          <p className="text-xs text-gray-400 italic">{oneliner}</p>
+        )}
+
+        {/* Animated accent line */}
         <motion.div
-          initial={{ scale: 0.95, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative group"
-        >
-          <div className="bg-white/50 backdrop-blur-xl rounded-3xl shadow-xl p-4 transition-transform hover:scale-105 hover:shadow-2xl">
-            <img
-              src={heroImg}
-              alt="Dashboard preview"
-              className="rounded-2xl w-full h-[380px] object-cover object-center"
-            />
-            {/* Glow border */}
-            <div className="absolute inset-0 rounded-2xl border border-white/30 shadow-inner pointer-events-none" />
-          </div>
-        </motion.div>
+          layout
+          className="h-1 w-10 bg-sky-500 rounded-full mt-2 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500"
+        />
       </div>
-    </section>
+    </motion.article>
   );
-}
+};
+
+export default React.memo(ServiceCard);

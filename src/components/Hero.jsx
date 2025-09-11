@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import Tilt from "react-parallax-tilt";
 import CTA from "./CTA";
 import heroImg from "../assets/hero.jpg";
 
-export default function Hero() {
+// Motion variants
+const textVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (delay = 0) => ({ opacity: 1, y: 0, transition: { delay, duration: 0.6 } }),
+};
+
+const Hero = () => {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Track mouse for subtle parallax
+  // Mouse parallax effect
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePos({
@@ -19,32 +25,33 @@ export default function Hero() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  // Memoized styles for floating shapes
+  const floatingStyles = useMemo(() => ({
+    shape1: { x: mousePos.x, y: mousePos.y },
+    shape2: { x: -mousePos.x, y: -mousePos.y },
+  }), [mousePos]);
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-white via-slate-50 to-slate-100">
-      {/* Floating Shapes with subtle parallax */}
+      {/* Floating Shapes */}
       <motion.div
-        style={{
-          x: mousePos.x,
-          y: mousePos.y,
-        }}
-        className="absolute top-24 left-16 w-32 h-32 border-4 border-sky-400/20 rounded-lg rotate-12"
+        style={floatingStyles.shape1}
+        className="absolute top-24 left-16 w-32 h-32 border-4 border-sky-400/20 rounded-lg rotate-12 pointer-events-none"
       />
       <motion.div
-        style={{
-          x: -mousePos.x,
-          y: -mousePos.y,
-        }}
-        className="absolute bottom-32 right-20 w-40 h-40 border-4 border-violet-400/20 rounded-full"
+        style={floatingStyles.shape2}
+        className="absolute bottom-32 right-20 w-40 h-40 border-4 border-violet-400/20 rounded-full pointer-events-none"
       />
 
-      {/* Hero Content */}
+      {/* Main Hero Grid */}
       <div className="relative max-w-7xl mx-auto px-4 py-20 sm:py-28 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        {/* Text Side */}
+        {/* Hero Text */}
         <div>
           <motion.h1
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+            variants={textVariants}
             className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight tracking-tight"
           >
             Empowering Growth <br className="hidden sm:block" />
@@ -55,21 +62,22 @@ export default function Hero() {
           </motion.h1>
 
           <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.15, duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            custom={0.15}
+            variants={textVariants}
             className="mt-6 text-lg text-gray-600 max-w-2xl leading-relaxed"
           >
-            Enterprise-grade IT solutions — IT staffing, cloud & mobile
-            development, AI & analytics, healthcare IT — to accelerate digital
-            transformation.
+            Enterprise-grade IT solutions — IT staffing, cloud & mobile development,
+            AI & analytics, healthcare IT — to accelerate digital transformation.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            custom={0.3}
+            variants={textVariants}
             className="mt-10 flex flex-wrap gap-4"
           >
             <CTA to="/services" label="Explore Services" primary />
@@ -78,19 +86,19 @@ export default function Hero() {
           </motion.div>
 
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.45, duration: 0.6 }}
+            initial="hidden"
+            animate="visible"
+            custom={0.45}
+            variants={textVariants}
             className="mt-8 text-sm text-gray-500"
           >
-            <strong className="text-gray-900">Industries:</strong> Healthcare,
-            Finance, Retail
+            <strong className="text-gray-900">Industries:</strong> Healthcare, Finance, Retail
           </motion.p>
         </div>
 
-        {/* Image Side */}
+        {/* Hero Image */}
         <Tilt
-          glareEnable={true}
+          glareEnable
           glareMaxOpacity={0.2}
           tiltMaxAngleX={10}
           tiltMaxAngleY={10}
@@ -98,13 +106,12 @@ export default function Hero() {
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8 }}
+            animate={{ scale: 1, opacity: 1, transition: { duration: 0.8 } }}
             className="relative bg-white/40 backdrop-blur-xl rounded-2xl shadow-xl hover:shadow-2xl transition p-4"
           >
             <img
               src={heroImg}
-              alt="Dashboard preview — Infirmary Hub"
+              alt="Enterprise dashboard preview"
               className="rounded-xl w-full h-[360px] object-cover object-center"
             />
             <div
@@ -116,4 +123,6 @@ export default function Hero() {
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
