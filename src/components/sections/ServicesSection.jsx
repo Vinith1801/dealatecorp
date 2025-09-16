@@ -1,3 +1,4 @@
+import React from "react";
 import FadeIn from "../motion/FadeIn";
 import ServiceCard from "../ServiceCard";
 import CTA from "../CTA";
@@ -22,6 +23,7 @@ export default function ServicesSection() {
           <FadeIn key={s.title} delay={i}>
             <ServiceCard
               {...s}
+              icon={<s.icon />}
               className="transition-all duration-300 group-hover:shadow-xl group-hover:scale-[1.02]"
             />
           </FadeIn>

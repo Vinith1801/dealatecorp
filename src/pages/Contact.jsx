@@ -1,23 +1,22 @@
 import React, { useState } from "react";
-import { Send, MapPin } from "lucide-react";
+import { MapPin, Send } from "lucide-react";
 import { motion } from "framer-motion";
-import Card from "../components/ServiceCard"; // reusable card component
+import Card from "../components/ServiceCard"; 
+import { office } from "../data/contact";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", company: "", message: "" });
   const [status, setStatus] = useState(null);
 
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  const sectionVariant = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) };
 
-  function handleSubmit(e) {
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("Sending...");
     setTimeout(() => setStatus("Thanks — we will respond within 24 hours."), 900);
-  }
-
-  const sectionVariant = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) };
+  };
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-20">
@@ -85,11 +84,13 @@ export default function Contact() {
       {/* Office Info */}
       <motion.section className="space-y-4" initial="hidden" whileInView="visible" variants={sectionVariant}>
         <h3 className="text-xl font-semibold text-gray-900">Office</h3>
-        <p className="text-gray-600 flex items-center gap-2"><MapPin className="w-4 h-4 text-sky-500" />123 Business Road, City, Country</p>
+        <p className="text-gray-600 flex items-center gap-2">
+          <MapPin className="w-4 h-4 text-sky-500" /> {office.address}
+        </p>
         <Card className="p-0 overflow-hidden shadow-md">
           <iframe
             title="Dealatecorp office location"
-            src="https://www.google.com/maps/embed?pb=!1m18"
+            src={office.mapSrc}
             className="w-full h-64 border-0"
             loading="lazy"
           />

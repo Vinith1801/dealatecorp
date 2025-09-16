@@ -1,24 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Briefcase, Send } from "lucide-react";
-import Card from "../components/ServiceCard"; // reuse the premium card component
+import Card from "../components/ServiceCard"; 
+import { jobs, offers } from "../data/careers";
 
-const jobs = [
-  { role: "Java Developer", location: "Hyderabad", details: "Microservices & Spring Boot expertise (4+ years)." },
-  { role: "Salesforce Developer", location: "Hyderabad", details: "Apex, LWC, CI/CD, TDD (5–8 years)." },
-  { role: "Lead Salesforce Developer", location: "Noida", details: "Mentor teams, lead architecture (6 years)." },
-  { role: "Copado DevOps Release Engineer", location: "Hyderabad", details: "CI/CD pipelines, Github, Salesforce DevOps (4 years)." },
-  { role: "Customer Support Executive", location: "Hyderabad", details: "Fresh graduate, excellent communication, US shift." },
-];
-
-const offers = [
-  "Dynamic, inclusive culture",
-  "Learning pathways, training, certifications",
-  "Hybrid and flexible working models",
-  "Global exposure with international clients",
-];
-
-const sectionVariant = { hidden: { opacity: 0, y: 20 }, visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) };
+const sectionVariant = { 
+  hidden: { opacity: 0, y: 20 }, 
+  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.1 } }) 
+};
 
 export default function Careers() {
   return (
@@ -26,7 +15,9 @@ export default function Careers() {
 
       {/* Header */}
       <motion.header className="text-center md:text-left max-w-3xl mx-auto space-y-3"
-        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+        initial={{ opacity: 0, y: 20 }} 
+        whileInView={{ opacity: 1, y: 0 }} 
+        transition={{ duration: 0.6 }}
       >
         <h1 className="text-4xl font-extrabold text-gray-900">Join Our Team</h1>
         <p className="text-gray-600">
@@ -50,7 +41,7 @@ export default function Careers() {
                     </div>
                     <p className="text-sm text-gray-600">{job.details}</p>
                   </>
-}
+                }
                 cta={{ label: "Apply Now", icon: <Send className="w-4 h-4" />, gradient: "from-sky-500 to-violet-500" }}
               />
             </motion.div>
@@ -65,7 +56,7 @@ export default function Careers() {
           {offers.map((offer, i) => (
             <motion.div key={i} initial="hidden" whileInView="visible" variants={sectionVariant} custom={i} viewport={{ once: true }}>
               <Card
-                icon={<Send className="w-5 h-5 text-sky-500" />} // optional icon for uniformity
+                icon={<Send className="w-5 h-5 text-sky-500" />}
                 title={offer}
                 desc={null}
               />

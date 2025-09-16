@@ -1,32 +1,30 @@
+// src/pages/Blog.jsx
 import React from "react";
+import { motion } from "framer-motion";
+import CTA from "../components/CTA";
+import { posts } from "../data/blog";
 
-const posts = [
-  {
-    title: "Cloud Strategies for 2025",
-    excerpt:
-      "How modern enterprises are adopting hybrid cloud for resilience and cost control.",
-    image: "/assets/blog1.webp",
-  },
-  {
-    title: "The Future of IT Staffing",
-    excerpt:
-      "Insights into global hiring trends, remote work, and specialized talent acquisition.",
-    image: "/assets/blog2.webp",
-  },
-  {
-    title: "AI in Healthcare IT",
-    excerpt:
-      "Exploring how machine learning solutions improve patient care and operational efficiency.",
-    image: "/assets/blog3.webp",
-  },
-];
+const sectionVariant = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, delay: i * 0.1 },
+  }),
+};
 
 export default function Blog() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 space-y-16">
+    <div className="max-w-6xl mx-auto px-4 py-16 space-y-16">
 
       {/* Header */}
-      <header className="text-center md:text-left max-w-3xl mx-auto">
+      <motion.header
+        className="text-center md:text-left max-w-3xl mx-auto"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariant}
+      >
         <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900">
           Dealate Insights
         </h1>
@@ -35,14 +33,25 @@ export default function Blog() {
           ahead with insights on IT staffing, digital transformation,
           healthcare IT, and AI.
         </p>
-      </header>
+      </motion.header>
 
       {/* Blog Posts */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <motion.section
+        className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={{
+          hidden: {},
+          visible: { transition: { staggerChildren: 0.1 } },
+        }}
+      >
         {posts.map((post, idx) => (
-          <article
+          <motion.article
             key={idx}
             className="bg-white rounded-3xl shadow-md border overflow-hidden flex flex-col hover:shadow-xl transition"
+            variants={sectionVariant}
+            custom={idx}
           >
             <img
               src={post.image}
@@ -52,19 +61,25 @@ export default function Blog() {
             <div className="p-5 flex-1 flex flex-col">
               <h2 className="text-lg font-semibold text-gray-900">{post.title}</h2>
               <p className="text-sm text-gray-600 mt-2 flex-1">{post.excerpt}</p>
-              <a
-                href="#"
-                className="mt-4 inline-flex items-center gap-1 text-sky-500 font-medium hover:underline"
-              >
-                Read More →
-              </a>
+              <CTA
+                to="#"
+                label="Read More"
+                className="mt-4 text-sky-500 font-medium hover:underline px-0 py-0"
+                textOnly
+              />
             </div>
-          </article>
+          </motion.article>
         ))}
-      </section>
+      </motion.section>
 
       {/* Subscribe Section */}
-      <section className="bg-slate-50 p-8 rounded-3xl text-center shadow-md">
+      <motion.section
+        className="bg-slate-50 p-8 rounded-3xl text-center shadow-md"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        variants={sectionVariant}
+      >
         <h3 className="text-xl font-extrabold text-gray-900">
           Subscribe for Updates
         </h3>
@@ -81,7 +96,8 @@ export default function Blog() {
             Subscribe
           </button>
         </form>
-      </section>
+      </motion.section>
+
     </div>
   );
 }
