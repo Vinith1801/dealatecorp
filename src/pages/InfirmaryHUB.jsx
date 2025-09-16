@@ -64,7 +64,7 @@ export default function InfirmaryHUB() {
           className="rounded-3xl overflow-hidden shadow-2xl"
         >
           <img
-            src="/assets/hero-screenshot.webp"
+            src="/assets/hero.jpg"
             alt="Infirmary Hub dashboard preview"
             className="w-full h-[420px] object-cover"
           />

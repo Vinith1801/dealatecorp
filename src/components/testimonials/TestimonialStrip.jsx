@@ -1,8 +1,9 @@
 import React, { useRef } from "react";
 import { Quote } from "lucide-react";
 import { motion } from "framer-motion";
+import { testimonials } from "../../data/testimonials";
 
-export default function TestimonialStrip({ items = [] }) {
+export default function TestimonialStrip() {
   const scrollRef = useRef();
 
   return (
@@ -16,7 +17,7 @@ export default function TestimonialStrip({ items = [] }) {
           ref={scrollRef}
           className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-6 scrollbar-hide relative"
         >
-          {items.map((t, idx) => (
+          {testimonials.map((t, idx) => (
             <motion.blockquote
               key={idx}
               initial={{ y: 40, opacity: 0 }}

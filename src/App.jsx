@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
 import Layout from "./components/Layout";
 import PageWrapper from "./components/PageWrapper";
 
@@ -16,9 +15,6 @@ import Careers from "./pages/Careers";
 export default function App() {
   return (
     <>
-      <Helmet>
-        <meta charSet="utf-8" />
-      </Helmet>
       <Layout>
         <Routes>
           <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
