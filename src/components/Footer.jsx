@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Mail, MapPin, Linkedin, Twitter, Github } from "lucide-react";
+import Logo from "../assets/logo.webp";
 
 export default function Footer() {
   const socials = [
@@ -15,7 +16,7 @@ export default function Footer() {
         
         {/* Brand + Social */}
         <div>
-          <img src="/src/assets/logo.webp" alt="Dealatecorp logo" className="h-10 w-auto mb-3" />
+          <img src={Logo} alt="Dealatecorp logo" className="h-10 w-auto mb-3" />
           <p className="text-sm leading-relaxed max-w-sm">
             Premium IT consulting and digital innovation services. Driving transformation with people-first technology.
           </p>
